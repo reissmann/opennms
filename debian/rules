@@ -9,15 +9,20 @@ export SHELL=/bin/bash
 # Maven requires JAVA_HOME to be set properly
 export JAVA_HOME=$(shell debian/getjava)
 
+export OPENNMS_HOME=/usr/share/opennms
+export DIST_DIR=$(CURDIR)/debian
+export INST_ROOT=$(DIST_DIR)/temp
+export INST_PREFIX=$(INST_ROOT)$(OPENNMS_HOME)
+
 export BUILDDEFINES=\
-	-Dopennms.home=/usr/share/opennms \
-	-Ddist.dir=$(CURDIR)/debian -Ddist.name=temp \
-	-Dinstall.dir=/usr/share/opennms \
+	-Dopennms.home=$(OPENNMS_HOME) \
+	-Ddist.dir=$(DIST_DIR) -Ddist.name=temp \
+	-Dinstall.dir=$(OPENNMS_HOME) \
 	-Dinstall.init.dir=/etc/init.d \
 	-Dinstall.rrdtool.bin=/usr/bin/rrdtool \
 	-Dinstall.share.dir=/var/lib/opennms \
-	-Dinstall.servlet.dir=/usr/share/opennms/webapps \
-	-Dinstall.webapps.dir=/usr/share/opennms/webapps \
+	-Dinstall.servlet.dir=$(OPENNMS_HOME)/webapps \
+	-Dinstall.webapps.dir=$(OPENNMS_HOME)/webapps \
 	-Dinstall.logs.dir=/var/log/opennms \
 	-Dinstall.pid.file=/var/run/opennms.pid \
 	-Dmaven.test.skip.exec=true \
@@ -66,8 +71,20 @@ $(STAMP_BUILD):
 			fi; \
 		fi; \
 	fi
-	find debian/temp -type d -name .svn -exec rm -rf {} \;
-	find debian/temp -type d -name .git -exec rm -rf {} \;
+	find $(INST_ROOT) -type d -name .svn -exec rm -rf {} \;
+	find $(INST_ROOT) -type d -name .git -exec rm -rf {} \;
+	for FILE in $(INST_PREFIX)/lib/*.jar; do \
+		BASENAME=`basename $$FILE`; \
+		find $(INST_PREFIX)/system -name $$BASENAME | while read SYSFILE; do \
+			rm -f $$SYSFILE; \
+			ln -sf $(OPENNMS_HOME)/lib/$$BASENAME $$SYSFILE; \
+		done; \
+		find $(INST_PREFIX)/jetty-webapps/opennms-remoting/webstart -name $$BASENAME | while read WEBFILE; do \
+			cp $$WEBFILE $(INST_PREFIX)/lib/$$BASENAME; \
+			rm -f $$WEBFILE; \
+			ln -sf $(OPENNMS_HOME)/lib/$$BASENAME $$WEBFILE; \
+		done; \
+	done
 	touch $(STAMP_BUILD)
 
 clean:

@@ -565,24 +565,17 @@ rm -rf $RPM_BUILD_ROOT%{instprefix}/contrib/remote-poller
 rm -rf $RPM_BUILD_ROOT%{instprefix}/lib/*.tar.gz
 
 # Remove all duplicate JARs from /system and symlink them to the JARs in /lib to save disk space
-for FILE in $RPM_BUILD_ROOT%{instprefix}/lib/*.jar; do
-	BASENAME=`basename $FILE`
-	for SYSFILE in `find $RPM_BUILD_ROOT%{instprefix}/system -name $BASENAME`; do
-		rm -f $SYSFILE
-		ln -s /opt/opennms/lib/$BASENAME $SYSFILE
+# Copy duplicate jars from JNLP to lib, then symlink them to /lib
+for FILE in "$RPM_BUILD_ROOT%{instprefix}/lib"/*.jar; do
+	BASENAME=`basename "$FILE"`
+	find "$RPM_BUILD_ROOT%{instprefix}/system" -name "$BASENAME" | while read SYSFILE; do
+		rm -f "$SYSFILE"
+		ln -sf "%{instprefix}/lib/$BASENAME" "$SYSFILE"
 	done
-done
-
-# Remove all duplicate JARs from /jetty-webapps/opennms-remoting/webstart and symlink them to the JARs in /lib to save disk space
-for FILE in $RPM_BUILD_ROOT%{instprefix}/lib/*.jar; do
-	BASENAME=`basename $FILE`
-	for SYSFILE in `find $RPM_BUILD_ROOT%{instprefix}/jetty-webapps/opennms-remoting/webstart -name $BASENAME`; do
-		# replace the "lib" version with the signed webstart version
-		cp "$SYSFILE" "%{instprefix}/lib/${BASENAME}"
-
-		# then update the links
-		rm -f $SYSFILE
-		ln -s %{instprefix}/lib/$BASENAME $SYSFILE
+	find $RPM_BUILD_ROOT%{jettydir}/opennms-remoting/webstart -name "$BASENAME" | while read SYSFILE; do
+		cp "$SYSFILE" "%{instprefix}/lib/$BASENAME"
+		rm -f "$SYSFILE"
+		ln -sf "%{instprefix}/lib/$BASENAME" "$SYSFILE"
 	done
 done
 
