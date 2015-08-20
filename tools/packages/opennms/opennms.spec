@@ -573,7 +573,7 @@ for FILE in "$RPM_BUILD_ROOT%{instprefix}/lib"/*.jar; do
 		ln -sf "%{instprefix}/lib/$BASENAME" "$SYSFILE"
 	done
 	find $RPM_BUILD_ROOT%{jettydir}/opennms-remoting/webstart -name "$BASENAME" | while read SYSFILE; do
-		cp "$SYSFILE" "%{instprefix}/lib/$BASENAME"
+		cp "$SYSFILE" "$RPM_BUILD_ROOT%{instprefix}/lib/$BASENAME"
 		rm -f "$SYSFILE"
 		ln -sf "%{instprefix}/lib/$BASENAME" "$SYSFILE"
 	done
