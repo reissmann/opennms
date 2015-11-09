@@ -19,12 +19,6 @@
                     <th class="col-sm-6">
                         Attributes
                     </th>
-                    <th class="col-sm-7">
-                        Edit
-                    </th>
-                    <th class="col-sm-7">
-                        Delete
-                    </th>
                 </tr>
                 <tr ng-repeat="item in items">
                     <td>
@@ -47,8 +41,6 @@
                             <b>{{attribute.key}}:</b> {{attribute.value}}
                         </p>
                     </td>
-                    <td><button ng-click="bsEdit(item.id)">edit</button></td>
-                    <td><button ng-click="bsDelete(item.id)">delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -57,5 +49,5 @@
         {{name}}
         <br />
         <button ng-click="bsCreate()">create</button>                       
-    </div> 
+    </div>
 </div>

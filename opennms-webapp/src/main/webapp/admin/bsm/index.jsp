@@ -40,10 +40,11 @@
 	<jsp:param name="breadcrumb" value="Business Services" />
 	<jsp:param name="script" value='<script type="text/javascript" src="js/angular-1.4.0.min.js"></script>' />
 	<jsp:param name="script" value='<script type="text/javascript" src="js/angular-resource-1.4.0.min.js"></script>' />
+	<jsp:param name="script" value='<script type="text/javascript" src="js/angular-route-1.4.0.min.js"></script>' />
 
 	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/BusinessServicesController.js"></script>' />
 </jsp:include>
 
-<ng-include src="'admin/bsm/main.html'"></ng-include>
+<div ng-view></div>
 
 <jsp:include page="/includes/bootstrap-footer.jsp" flush="false"/>
