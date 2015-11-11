@@ -41,10 +41,12 @@
 	<jsp:param name="script" value='<script type="text/javascript" src="js/angular-1.4.0.min.js"></script>' />
 	<jsp:param name="script" value='<script type="text/javascript" src="js/angular-resource-1.4.0.min.js"></script>' />
 	<jsp:param name="script" value='<script type="text/javascript" src="js/angular-route-1.4.0.min.js"></script>' />
-
-	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/BusinessServicesController.js"></script>' />
+	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/controllers/BusinessServicesController.js"></script>' />
+	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/controllers/BusinessServicesListController.js"></script>' />
+	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/controllers/BusinessServicesEditController.js"></script>' />
+	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/services/BusinessServicesService.js"></script>' />
 </jsp:include>
+<h3>Business Services</h3>
 
-<div ng-view></div>
-
+<div ng-view=""></div>
 <jsp:include page="/includes/bootstrap-footer.jsp" flush="false"/>
