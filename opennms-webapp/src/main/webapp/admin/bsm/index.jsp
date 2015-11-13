@@ -47,6 +47,5 @@
 	<jsp:param name="script" value='<script type="text/javascript" src="admin/bsm/js/services/BusinessServicesService.js"></script>' />
 </jsp:include>
 <h3>Business Services</h3>
-
 <div ng-view=""></div>
 <jsp:include page="/includes/bootstrap-footer.jsp" flush="false"/>

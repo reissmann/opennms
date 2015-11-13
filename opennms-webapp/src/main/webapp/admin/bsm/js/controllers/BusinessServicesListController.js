@@ -61,12 +61,16 @@
                                 });
                     };
                     
-                    $scope.bsEdit = function (businessServiceToEdit) {
-                        $log.debug("bsEdit");
-                        $log.debug("bsEdit BS: " + businessServiceToEdit.name);
-                        $scope.businessServiceToEdit = businessServiceToEdit;
-                        $location.path('/edit');
+                    $scope.goEdit = function(id) {
+                        $window.location.href = '#edit/' + id;
                     };
+                    
+//                    $scope.bsEdit = function (businessServiceToEdit) {
+//                        $log.debug("bsEdit");
+//                        $log.debug("bsEdit BS: " + businessServiceToEdit.name);
+//                        $scope.businessServiceToEdit = businessServiceToEdit;
+//                        $location.path('/edit');
+//                    };
                     
                 }]);
 }());

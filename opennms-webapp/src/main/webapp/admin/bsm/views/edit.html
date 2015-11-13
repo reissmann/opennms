@@ -1,11 +1,13 @@
 <div>
 
     <div class="panel panel-default">
-        <div class="panel-body" ng-if="bsToEdit !== null">
+        <div class="panel-body" ng-if="bsToEdit !=== null">
             <strong>There are no business services defined.</strong>
         </div>
         <div class="panel-body" ng-if="bsToEdit.id > 0">
-            <strong>{{businessServiceToEdit.name}}</strong>
+            <strong>ID: {{bsToEdit.id}}</strong>
+            <br />
+            <strong>Name: {{bsToEdit.name}}</strong>
         </div>
         
     </div>

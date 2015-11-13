@@ -52,7 +52,8 @@
                 </td>
 <!--                    <a href="admin/bsm/index.jsp#/edit" class="btn btn-default">edit</a>-->
 
-                <td><a class="btn btn-default" href="admin/bsm/edit/{{item.id}}">edit</a></td>
+                <!--<td><a class="btn btn-default" href="admin/bsm/edit/{{item.id}}">edit</a></td>-->
+                <td><button class="btn btn-default" ng-click="goEdit(item.id)" >edit</button></td>
                 <td><button class="btn btn-default" ng-click="bsDelete(item.id)">delete</button></td>
             </tr>
         </tbody>
