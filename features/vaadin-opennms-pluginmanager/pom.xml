@@ -17,7 +17,7 @@
   </description>
   <properties>
     <bundle.symbolicName>vaadin-opennms-pluginmanager</bundle.symbolicName>
-    <bundle.namespace>org.opennms.features.pluginmgr</bundle.namespace>
+    <bundle.namespace>org.opennms.features.pluginmgr.vaadin.config.opennms</bundle.namespace>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <pluginmanagerVersion>1.0-SNAPSHOT</pluginmanagerVersion>
     <licencemanagerVersion>1.0-SNAPSHOT</licencemanagerVersion>
@@ -27,19 +27,66 @@
   <build>
     <resources>
       <resource>
-        <directory>src/main/java</directory>
+        <directory>src/main/resources</directory>
       </resource>
       <resource>
-        <directory>src/main/resources</directory>
+        <directory>${project.build.directory}/imported-resources</directory>
       </resource>
     </resources>
     <plugins>
+    
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <configuration>
+              <artifactItems>
+                <artifactItem>
+                  <groupId>org.opennms.plugins</groupId>
+                  <artifactId>org.opennms.plugin.pluginmanager.pluginmanager-core</artifactId>
+                  <version>${pluginmanagerVersion}</version>
+                  <type>jar</type>
+                  <overWrite>true</overWrite>
+                  <includes>diagnostics/*</includes>
+                  <outputDirectory>${project.build.directory}/imported-resources</outputDirectory>
+                </artifactItem>
+              </artifactItems>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+<!--       <plugin> -->
+<!--         <groupId>org.codehaus.mojo</groupId> -->
+<!--         <artifactId>build-helper-maven-plugin</artifactId> -->
+<!--         <executions> -->
+<!--           <execution> -->
+<!--             <id>add-source</id> -->
+<!--             <phase>process-sources</phase> -->
+<!--             <goals> -->
+<!--               <goal>add-source</goal> -->
+<!--             </goals> -->
+<!--             <configuration> -->
+<!--               <sources> -->
+<!--                 <source>${project.build.directory}/imported-resources/src/main/resources</source> -->
+<!--               </sources> -->
+<!--             </configuration> -->
+<!--           </execution> -->
+<!--         </executions> -->
+<!--       </plugin> -->
+    
       <plugin>
         <groupId>org.opennms.maven.plugins</groupId>
         <artifactId>features-maven-plugin</artifactId>
         <configuration>
           <bundles>
             <bundle>mvn:org.opennms.plugins/vaadin-opennms-pluginmanager/${project.version}</bundle>
+            <bundle>mvn:org.opennms.plugins/org.opennms.plugin.pluginmanager.pluginmanager-core/${pluginmanagerVersion}</bundle>
           </bundles>
 
           <!-- repos for licence manager and feature manager -->
@@ -206,7 +253,7 @@
       <groupId>org.opennms.plugins</groupId>
       <artifactId>org.opennms.plugin.pluginmanager.pluginmanager-core</artifactId>
       <version>${pluginmanagerVersion}</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
 
     <!--test dependencies -->

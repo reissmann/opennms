@@ -37,7 +37,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Map;
 
-import org.opennms.features.pluginmgr.vaadin.config.internal.HttpServletRequestVaadinImpl;
+import org.opennms.features.pluginmgr.vaadin.config.opennms.internal.HttpServletRequestVaadinImpl;
 import org.opennms.web.api.OnmsHeaderProvider;
 
 import com.vaadin.annotations.Theme;

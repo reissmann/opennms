@@ -26,7 +26,7 @@
  *     http://www.opennms.com/
  *******************************************************************************/
 
-package org.opennms.features.pluginmgr.vaadin.config.internal;
+package org.opennms.features.pluginmgr.vaadin.config.opennms.internal;
 
 import java.io.BufferedReader;
 import java.io.IOException;

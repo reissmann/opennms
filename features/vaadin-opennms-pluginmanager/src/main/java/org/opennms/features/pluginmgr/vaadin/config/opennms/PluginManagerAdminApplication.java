@@ -38,7 +38,7 @@ import java.net.URL;
 import java.util.Map;
 
 import org.opennms.features.pluginmgr.SessionPluginManager;
-import org.opennms.features.pluginmgr.vaadin.config.internal.HttpServletRequestVaadinImpl;
+import org.opennms.features.pluginmgr.vaadin.config.opennms.internal.HttpServletRequestVaadinImpl;
 import org.opennms.features.pluginmgr.vaadin.pluginmanager.PluginManagerUIMainPanel;
 import org.opennms.web.api.OnmsHeaderProvider;
 
@@ -46,12 +46,9 @@ import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.Page;
-import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.CustomLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
